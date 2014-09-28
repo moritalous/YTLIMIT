@@ -18,9 +18,8 @@ public class SettingActivity extends ActionBarActivity implements
 		OnClickListener {
 
 	private Button button1;
-	
+
 	public static final String EXTRA_PACKAGE_NAME = "package_name";
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,12 @@ public class SettingActivity extends ActionBarActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.button1:
+		case R.id.button1: {
+			Intent intent = new Intent(this, PackageSelectActivity.class);
+			startActivity(intent);
+		}
+
+		case 999:
 
 			PackageManager manager = getPackageManager();
 			List<PackageInfo> packages = manager
@@ -64,31 +68,33 @@ public class SettingActivity extends ActionBarActivity implements
 
 				if ("com.google.android.youtube".equals(info.packageName)) {
 
-					Intent intent = new Intent(getApplicationContext(), ShortcutActivity.class);
+					Intent intent = new Intent(getApplicationContext(),
+							ShortcutActivity.class);
 					intent.setAction(Intent.ACTION_MAIN);
-//					intent.setClassName(this, intent.getClass().getName());
-					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+					// intent.setClassName(this, intent.getClass().getName());
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+							| Intent.FLAG_ACTIVITY_NEW_TASK);
 					intent.putExtra(EXTRA_PACKAGE_NAME, info.packageName);
-					
-					
+
 					Intent createShortcut = new Intent();
-					
-					
+
 					// ショートカットインテントを指定
-					createShortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, intent);
-					createShortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, info.applicationInfo.loadLabel(manager));
+					createShortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT,
+							intent);
+					createShortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME,
+							info.applicationInfo.loadLabel(manager));
 					try {
-						createShortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON, ((BitmapDrawable)manager.getApplicationIcon(info.packageName)).getBitmap());
+						createShortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+								((BitmapDrawable) manager
+										.getApplicationIcon(info.packageName))
+										.getBitmap());
 					} catch (Exception e) {
 						System.out.println("Error");
 					}
-					createShortcut.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-					
-					sendBroadcast(createShortcut);
-					
-					
-					
+					createShortcut
+							.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 
+					sendBroadcast(createShortcut);
 
 					break;
 				}
