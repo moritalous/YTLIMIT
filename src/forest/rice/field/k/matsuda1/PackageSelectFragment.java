@@ -114,14 +114,14 @@ public class PackageSelectFragment extends ListFragment {
 	}
 
 	class PackageLoadAsyncTask extends
-			AsyncTask<Context, String, List<PackageItem>> {
+			AsyncTask<String, String, List<PackageItem>> {
 
 		@Override
-		protected List<PackageItem> doInBackground(Context... params) {
+		protected List<PackageItem> doInBackground(String... params) {
 
 			List<PackageItem> result = new ArrayList<PackageItem>();
 
-			PackageManager manager = params[0].getPackageManager();
+			PackageManager manager = getActivity().getPackageManager();
 			List<PackageInfo> packages = manager
 					.getInstalledPackages(PackageManager.GET_ACTIVITIES);
 
