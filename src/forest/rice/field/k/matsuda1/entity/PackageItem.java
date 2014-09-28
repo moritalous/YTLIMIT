@@ -1,4 +1,4 @@
-package forest.rice.field.k.matsuda1.dummy;
+package forest.rice.field.k.matsuda1.entity;
 
 import android.graphics.Bitmap;
 

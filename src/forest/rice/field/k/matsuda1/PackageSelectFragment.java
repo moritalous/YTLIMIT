@@ -19,7 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import forest.rice.field.k.matsuda1.dummy.PackageItem;
+import forest.rice.field.k.matsuda1.entity.PackageItem;
 
 /**
  * A fragment representing a list of Items.

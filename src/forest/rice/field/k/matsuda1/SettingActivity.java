@@ -57,6 +57,7 @@ public class SettingActivity extends ActionBarActivity implements
 			Intent intent = new Intent(this, PackageSelectActivity.class);
 			startActivity(intent);
 		}
+			break;
 
 		case 999:
 

@@ -5,7 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import forest.rice.field.k.matsuda1.PackageSelectFragment.OnFragmentInteractionListener;
-import forest.rice.field.k.matsuda1.dummy.PackageItem;
+import forest.rice.field.k.matsuda1.entity.PackageItem;
 
 public class PackageSelectActivity extends ActionBarActivity implements
 		OnFragmentInteractionListener {
@@ -18,6 +18,9 @@ public class PackageSelectActivity extends ActionBarActivity implements
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PackageSelectFragment()).commit();
 		}
+
+		// 戻るを有効にする
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -36,6 +39,15 @@ public class PackageSelectActivity extends ActionBarActivity implements
 		if (id == R.id.action_settings) {
 			return true;
 		}
+
+		switch (id) {
+		case android.R.id.home:
+			finish();
+			return true;
+		default:
+			break;
+		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -46,21 +58,4 @@ public class PackageSelectActivity extends ActionBarActivity implements
 		System.out.println();
 
 	}
-
-	// /**
-	// * A placeholder fragment containing a simple view.
-	// */
-	// public static class PlaceholderFragment extends Fragment {
-	//
-	// public PlaceholderFragment() {
-	// }
-	//
-	// @Override
-	// public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	// Bundle savedInstanceState) {
-	// View rootView = inflater.inflate(R.layout.fragment_package_select,
-	// container, false);
-	// return rootView;
-	// }
-	// }
 }
