@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,9 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import forest.rice.field.k.matsuda1.entity.PackageItem;
 
 public class SettingActivity extends ActionBarActivity implements
 		OnClickListener {
+	
+	private final int REQUEST_CODE_PACKAGE_SELECT = 9000;  
 
 	private Button button1;
 
@@ -55,7 +59,7 @@ public class SettingActivity extends ActionBarActivity implements
 		switch (v.getId()) {
 		case R.id.button1: {
 			Intent intent = new Intent(this, PackageSelectActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent, REQUEST_CODE_PACKAGE_SELECT);
 		}
 			break;
 
@@ -109,5 +113,25 @@ public class SettingActivity extends ActionBarActivity implements
 			break;
 		}
 
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+		case REQUEST_CODE_PACKAGE_SELECT:
+		{
+			String packageName = data.getStringExtra(PackageItem.EXTRA_PACKAGE_NAME);
+			String name =data.getStringExtra(PackageItem.EXTRA_PACKAGE_LABEL);
+			Bitmap icon = (Bitmap)data.getParcelableExtra(PackageItem.EXTRA_PACKAGE_ICON);
+			PackageItem item = new PackageItem(packageName, name, icon);
+		}
+			System.out.println();
+
+			
+			
+			break;
+		default:
+			break;
+		}
 	}
 }
